@@ -16,7 +16,10 @@ public class Main {
 
         String output = (new Main()).readRawDataToString();
         StringFix fix = new StringFix();
-        fix.seperateLines(output);
+        String newOutput = fix.seperateLines(output);
+        fix.foodSemicolonFix(newOutput);
+
+        System.out.println(fix.wordFixer(newOutput));
 
     }
 }
