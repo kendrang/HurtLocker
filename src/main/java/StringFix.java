@@ -1,7 +1,10 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringFix {
+
 
     public String seperateLines(String ourText) throws Exception {
 
@@ -14,7 +17,7 @@ public class StringFix {
 
     }
 
-    public String foodSemicolonFix(String ourText){
+    public String foodSemicolonFix(String ourText) {
 
         String food = "Food";
         Pattern pattern = Pattern.compile("(Food).");
@@ -26,7 +29,7 @@ public class StringFix {
     }
 
 
-    public String foodFixer(String ourText){
+    public String foodFixer(String ourText) {
         ourText = milkFixer(ourText);
         ourText = breadFixer(ourText);
         ourText = cookiesFixer(ourText);
@@ -34,14 +37,14 @@ public class StringFix {
         return ourText;
     }
 
-    public String keyFixer(String ourText){
+    public String keyFixer(String ourText) {
         ourText = nameFixer(ourText);
         ourText = priceFixer(ourText);
         return ourText;
 
     }
 
-    public String milkFixer(String ourText){
+    public String milkFixer(String ourText) {
         Pattern pattern = Pattern.compile("(:M)...");
         Matcher matcher = pattern.matcher(ourText);
         String trueMilk = ":Milk";
@@ -49,7 +52,7 @@ public class StringFix {
         return ourText;
     }
 
-    public String breadFixer(String ourText){
+    public String breadFixer(String ourText) {
         Pattern pattern = Pattern.compile("(:B)....");
         Matcher matcher = pattern.matcher(ourText);
         String trueBread = ":Bread";
@@ -57,7 +60,7 @@ public class StringFix {
         return ourText;
     }
 
-    public String cookiesFixer(String ourText){
+    public String cookiesFixer(String ourText) {
 
         Pattern pattern = Pattern.compile("(:C)......");
         Matcher matcher = pattern.matcher(ourText);
@@ -67,7 +70,7 @@ public class StringFix {
 
     }
 
-    public String appleFixer(String ourText){
+    public String appleFixer(String ourText) {
         Pattern pattern = Pattern.compile("(:a).....");
         Matcher matcher = pattern.matcher(ourText);
         String trueApples = ":Apples";
@@ -75,14 +78,15 @@ public class StringFix {
         return ourText;
     }
 
-    public String nameFixer(String ourText){
-        Pattern pattern = Pattern.compile("(n|N)...");
+    public String nameFixer(String ourText) {
+        Pattern pattern = Pattern.compile("(n|N)..e");
         Matcher matcher = pattern.matcher(ourText);
         String trueName = "name";
         ourText = matcher.replaceAll(trueName);
         return ourText;
     }
-    public String priceFixer(String ourText){
+
+    public String priceFixer(String ourText) {
         Pattern pattern = Pattern.compile("(;p)....");
         Matcher matcher = pattern.matcher(ourText);
         String truePrice = ";Price";
@@ -91,10 +95,9 @@ public class StringFix {
     }
 
 
-    public static long errorCounter(String ourText)
-    {
+    public static long errorCounter(String ourText) {
         Matcher matcher
-                = Pattern.compile(String.valueOf(":;"))
+                = Pattern.compile((":;"))
                 .matcher(ourText);
         int errorCount = 0;
 
@@ -104,4 +107,31 @@ public class StringFix {
         return errorCount;
     }
 
+    public String errorHandler(String ourText) {
+        Pattern pattern = Pattern.compile((":;"));
+        Matcher matcher = pattern.matcher(ourText);
+        String putNull = ":null;";
+        ourText = matcher.replaceAll(putNull);
+        return ourText;
+    }
+
+    public long itemCounter(String ourText, String itemToCount) {
+        Matcher matcher
+                = Pattern.compile(itemToCount)
+                .matcher(ourText);
+        int itemCount = 0;
+
+        while (matcher.find()) {
+            itemCount++;
+        }
+        return itemCount;
+    }
+
+    public String cuteFormat(String ourText) {
+        Pattern pattern = Pattern.compile(";");
+        Matcher matcher = pattern.matcher(ourText);
+        String spacing = "\n";
+        ourText = matcher.replaceAll(spacing);
+        return ourText;
+    }
 }

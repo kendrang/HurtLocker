@@ -16,12 +16,20 @@ public class Main {
 
         String output = (new Main()).readRawDataToString();
         StringFix fix = new StringFix();
+
+        System.out.println("Number of Errors: "+fix.errorCounter(output));
+        output = fix.errorHandler(output);
+
         String newOutput = fix.seperateLines(output);
         newOutput = fix.foodSemicolonFix(newOutput) ;
         newOutput = fix.foodFixer(newOutput);
         newOutput = fix.keyFixer(newOutput);
+
+
+        newOutput = fix.cuteFormat(newOutput);
         System.out.println(newOutput);
-        System.out.println(fix.errorCounter(newOutput));
+
+
 
     }
 }
