@@ -1,5 +1,7 @@
 import org.apache.commons.io.IOUtils;
 import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Main {
 
@@ -9,9 +11,12 @@ public class Main {
         return result;
     }
 
+
     public static void main(String[] args) throws Exception{
+
         String output = (new Main()).readRawDataToString();
-        System.out.println(output);
+        StringFix fix = new StringFix();
+        fix.seperateLines(output);
 
     }
 }
