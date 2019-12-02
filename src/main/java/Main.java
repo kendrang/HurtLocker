@@ -17,9 +17,11 @@ public class Main {
         String output = (new Main()).readRawDataToString();
         StringFix fix = new StringFix();
         String newOutput = fix.seperateLines(output);
-        fix.foodSemicolonFix(newOutput);
-
-        System.out.println(fix.wordFixer(newOutput));
+        newOutput = fix.foodSemicolonFix(newOutput) ;
+        newOutput = fix.foodFixer(newOutput);
+        newOutput = fix.keyFixer(newOutput);
+        System.out.println(newOutput);
+        System.out.println(fix.errorCounter(newOutput));
 
     }
 }

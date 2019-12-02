@@ -8,7 +8,7 @@ public class StringFix {
         String hashes = "##";
         Pattern pattern = Pattern.compile(hashes);
         Matcher matcher = pattern.matcher(ourText);
-        String space = "\n";
+        String space = "\n\n";
         ourText = matcher.replaceAll(space);
         return ourText;
 
@@ -26,12 +26,19 @@ public class StringFix {
     }
 
 
-    public String wordFixer(String ourText){
+    public String foodFixer(String ourText){
         ourText = milkFixer(ourText);
         ourText = breadFixer(ourText);
         ourText = cookiesFixer(ourText);
         ourText = appleFixer(ourText);
         return ourText;
+    }
+
+    public String keyFixer(String ourText){
+        ourText = nameFixer(ourText);
+        ourText = priceFixer(ourText);
+        return ourText;
+
     }
 
     public String milkFixer(String ourText){
@@ -68,7 +75,33 @@ public class StringFix {
         return ourText;
     }
 
-    public Integer countingErrors(String ourText){
-        return null;
+    public String nameFixer(String ourText){
+        Pattern pattern = Pattern.compile("(n|N)...");
+        Matcher matcher = pattern.matcher(ourText);
+        String trueName = "name";
+        ourText = matcher.replaceAll(trueName);
+        return ourText;
     }
+    public String priceFixer(String ourText){
+        Pattern pattern = Pattern.compile("(;p)....");
+        Matcher matcher = pattern.matcher(ourText);
+        String truePrice = ";Price";
+        ourText = matcher.replaceAll(truePrice);
+        return ourText;
+    }
+
+
+    public static long errorCounter(String ourText)
+    {
+        Matcher matcher
+                = Pattern.compile(String.valueOf(":;"))
+                .matcher(ourText);
+        int errorCount = 0;
+
+        while (matcher.find()) {
+            errorCount++;
+        }
+        return errorCount;
+    }
+
 }
